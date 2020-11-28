@@ -1,4 +1,4 @@
-#include <math.h>
+﻿#include <math.h>
 #include <stdio.h>
 
 #include "Mesh.h"
@@ -9,18 +9,18 @@
 
 float ColorArr[COLORNUM][3] = {{1.0, 0.0, 0.0},
 								{0.0, 1.0, 0.0},
-								{0.0, 0.0, 1.0},
+								{0.0, 0.0, 1.0}, // blue(2)
 								{1.0, 1.0, 0.0},
 								{1.0, 0.0, 1.0},
-								{0.0, 1.0, 1.0},
+								{0.0, 1.0, 1.0},  // yello(5)
 								{0.3, 0.3, 0.3},
 								{0.5, 0.5, 0.5},
 								{0.9, 0.9, 0.9},
 								{1.0, 0.5, 0.5},
 								{0.5, 1.0, 0.5},
 								{0.5, 0.5, 1.0},
-								{0.0, 0.0, 0.0},
-								{1.0, 1.0, 0.5}};
+								{0.0, 0.0, 0.0}, // black(12)
+								{1.0, 1.0, 1.0}}; // white(13)
 
 
 void Mesh::CreateCylinder(int nSegment, float fHeight, float fRadius)
@@ -250,7 +250,7 @@ void Mesh::CreateCuboid(float fSizeX, float fSizeY, float fSizeZ)
 	face[1].vert[2].vertIndex = 6;
 	face[1].vert[3].vertIndex = 7;
 	for (int i = 0; i < face[1].nVerts; i++)
-		face[1].vert[i].colorIndex = 0;
+		face[1].vert[i].colorIndex = 1;
 
 	face[2].nVerts = 4;
 	face[2].vert = new VertexID[face[2].nVerts];
@@ -259,7 +259,7 @@ void Mesh::CreateCuboid(float fSizeX, float fSizeY, float fSizeZ)
 	face[2].vert[2].vertIndex = 5;
 	face[2].vert[3].vertIndex = 4;
 	for (int i = 0; i < face[2].nVerts; i++)
-		face[2].vert[i].colorIndex = 0;
+		face[2].vert[i].colorIndex = 2;
 
 	face[3].nVerts = 4;
 	face[3].vert = new VertexID[face[3].nVerts];
@@ -268,7 +268,7 @@ void Mesh::CreateCuboid(float fSizeX, float fSizeY, float fSizeZ)
 	face[3].vert[2].vertIndex = 6;
 	face[3].vert[3].vertIndex = 7;
 	for (int i = 0; i < face[3].nVerts; i++)
-		face[3].vert[i].colorIndex = 0;
+		face[3].vert[i].colorIndex = 3;
 
 	face[4].nVerts = 4;
 	face[4].vert = new VertexID[face[4].nVerts];
@@ -277,7 +277,7 @@ void Mesh::CreateCuboid(float fSizeX, float fSizeY, float fSizeZ)
 	face[4].vert[2].vertIndex = 6;
 	face[4].vert[3].vertIndex = 5;
 	for (int i = 0; i < face[4].nVerts; i++)
-		face[4].vert[i].colorIndex = 0;
+		face[4].vert[i].colorIndex = 4;
 
 	face[5].nVerts = 4;
 	face[5].vert = new VertexID[face[5].nVerts];
@@ -286,7 +286,7 @@ void Mesh::CreateCuboid(float fSizeX, float fSizeY, float fSizeZ)
 	face[5].vert[2].vertIndex = 7;
 	face[5].vert[3].vertIndex = 4;
 	for (int i = 0; i < face[5].nVerts; i++)
-		face[5].vert[i].colorIndex = 0;
+		face[5].vert[i].colorIndex = 5;
 }
 
 void Mesh::CreateShape1(float fSizeX, float fSizeY, float fSizeZ, float fRadius, int nSegment)
@@ -380,7 +380,7 @@ void Mesh::CreateShape1(float fSizeX, float fSizeY, float fSizeZ, float fRadius,
 	face[face_idx].vert[2].vertIndex = point_idx + 6;
 	face[face_idx].vert[3].vertIndex = point_idx + 7;
 	for (int i = 0; i < face[face_idx].nVerts; i++)
-		face[face_idx].vert[i].colorIndex = 0;
+		face[face_idx].vert[i].colorIndex = 1;
 
 	// Left face of cuboid
 	face[++face_idx].nVerts = 4;
@@ -390,7 +390,7 @@ void Mesh::CreateShape1(float fSizeX, float fSizeY, float fSizeZ, float fRadius,
 	face[face_idx].vert[2].vertIndex = 1;
 	face[face_idx].vert[3].vertIndex = nSegment + 2;
 	for (int i = 0; i < face[face_idx].nVerts; i++)
-		face[face_idx].vert[i].colorIndex = 0;
+		face[face_idx].vert[i].colorIndex = 2;
 
 	// Right face of cuboid
 	face[++face_idx].nVerts = 4;
@@ -400,7 +400,7 @@ void Mesh::CreateShape1(float fSizeX, float fSizeY, float fSizeZ, float fRadius,
 	face[face_idx].vert[2].vertIndex = point_idx + 6;
 	face[face_idx].vert[3].vertIndex = point_idx + 7;
 	for (int i = 0; i < face[face_idx].nVerts; i++)
-		face[face_idx].vert[i].colorIndex = 0;
+		face[face_idx].vert[i].colorIndex = 3;
 	
 	// Top face of cuboid
 	face[++face_idx].nVerts = 4;
@@ -410,7 +410,7 @@ void Mesh::CreateShape1(float fSizeX, float fSizeY, float fSizeZ, float fRadius,
 	face[face_idx].vert[2].vertIndex = point_idx + 6;
 	face[face_idx].vert[3].vertIndex = point_idx + 5;
 	for (int i = 0; i < face[face_idx].nVerts; i++)
-		face[face_idx].vert[i].colorIndex = 0;
+		face[face_idx].vert[i].colorIndex = 4;
 
 	// Bottom face of cuboid
 	face[++face_idx].nVerts = 4;
@@ -420,7 +420,7 @@ void Mesh::CreateShape1(float fSizeX, float fSizeY, float fSizeZ, float fRadius,
 	face[face_idx].vert[2].vertIndex = point_idx + 7;
 	face[face_idx].vert[3].vertIndex = point_idx + 4;
 	for (int i = 0; i < face[face_idx].nVerts; i++)
-		face[face_idx].vert[i].colorIndex = 0;
+		face[face_idx].vert[i].colorIndex = 5;
 }
 
 void Mesh::CreateShape2(float fSizeX, float fSizeY, float fSizeZ, int nSegment){
@@ -522,7 +522,7 @@ void Mesh::CreateShape2(float fSizeX, float fSizeY, float fSizeZ, int nSegment){
 	face[face_idx].vert[2].vertIndex = point_idx + 6;
 	face[face_idx].vert[3].vertIndex = point_idx + 7;
 	for (int i = 0; i < face[face_idx].nVerts; i++)
-		face[face_idx].vert[i].colorIndex = 0;
+		face[face_idx].vert[i].colorIndex = 1;
 
 	// Left face
 	face[++face_idx].nVerts = 4;
@@ -532,7 +532,7 @@ void Mesh::CreateShape2(float fSizeX, float fSizeY, float fSizeZ, int nSegment){
 	face[face_idx].vert[2].vertIndex = point_idx + 5;
 	face[face_idx].vert[3].vertIndex = point_idx + 4;
 	for (int i = 0; i < face[face_idx].nVerts; i++)
-		face[face_idx].vert[i].colorIndex = 0;
+		face[face_idx].vert[i].colorIndex = 2;
 
 	// Right face
 	face[++face_idx].nVerts = 4;
@@ -542,7 +542,7 @@ void Mesh::CreateShape2(float fSizeX, float fSizeY, float fSizeZ, int nSegment){
 	face[face_idx].vert[2].vertIndex = point_idx + 6;
 	face[face_idx].vert[3].vertIndex = point_idx + 7;
 	for (int i = 0; i < face[face_idx].nVerts; i++)
-		face[face_idx].vert[i].colorIndex = 0;
+		face[face_idx].vert[i].colorIndex = 3;
 
 	// Top face
 	face[++face_idx].nVerts = 4;
@@ -552,7 +552,7 @@ void Mesh::CreateShape2(float fSizeX, float fSizeY, float fSizeZ, int nSegment){
 	face[face_idx].vert[2].vertIndex = point_idx + 6;
 	face[face_idx].vert[3].vertIndex = point_idx + 5;
 	for (int i = 0; i < face[face_idx].nVerts; i++)
-		face[face_idx].vert[i].colorIndex = 0;
+		face[face_idx].vert[i].colorIndex = 4;
 
 	// Bottom face
 	face[++face_idx].nVerts = 4;
@@ -562,7 +562,7 @@ void Mesh::CreateShape2(float fSizeX, float fSizeY, float fSizeZ, int nSegment){
 	face[face_idx].vert[2].vertIndex = point_idx + 7;
 	face[face_idx].vert[3].vertIndex = point_idx + 4;
 	for (int i = 0; i < face[face_idx].nVerts; i++)
-		face[face_idx].vert[i].colorIndex = 0;
+		face[face_idx].vert[i].colorIndex = 5;
 	
 	/********* RIGHT CUBOID *********/
 	// Initialize points
@@ -584,7 +584,7 @@ void Mesh::CreateShape2(float fSizeX, float fSizeY, float fSizeZ, int nSegment){
 	face[face_idx].vert[2].vertIndex = point_idx + 2;
 	face[face_idx].vert[3].vertIndex = point_idx + 3;
 	for (int i = 0; i < face[face_idx].nVerts; i++)
-		face[face_idx].vert[i].colorIndex = 0;
+		face[face_idx].vert[i].colorIndex = 6;
 
 	// Rear face
 	face[++face_idx].nVerts = 4;
@@ -594,7 +594,7 @@ void Mesh::CreateShape2(float fSizeX, float fSizeY, float fSizeZ, int nSegment){
 	face[face_idx].vert[2].vertIndex =point_idx + 6;
 	face[face_idx].vert[3].vertIndex =point_idx + 7;
 	for (int i = 0; i < face[face_idx].nVerts; i++)
-		face[face_idx].vert[i].colorIndex = 0;
+		face[face_idx].vert[i].colorIndex = 7;
 
 	// Left face
 	face[++face_idx].nVerts = 4;
@@ -604,7 +604,7 @@ void Mesh::CreateShape2(float fSizeX, float fSizeY, float fSizeZ, int nSegment){
 	face[face_idx].vert[2].vertIndex =point_idx + 5;
 	face[face_idx].vert[3].vertIndex =point_idx + 4;
 	for (int i = 0; i < face[face_idx].nVerts; i++)
-		face[face_idx].vert[i].colorIndex = 0;
+		face[face_idx].vert[i].colorIndex = 8;
 
 	// Right face
 	face[++face_idx].nVerts = 4;
@@ -614,7 +614,7 @@ void Mesh::CreateShape2(float fSizeX, float fSizeY, float fSizeZ, int nSegment){
 	face[face_idx].vert[2].vertIndex =point_idx + 6;
 	face[face_idx].vert[3].vertIndex =point_idx + 7;
 	for (int i = 0; i < face[face_idx].nVerts; i++)
-		face[face_idx].vert[i].colorIndex = 0;
+		face[face_idx].vert[i].colorIndex = 9;
 
 	// Top face
 	face[++face_idx].nVerts = 4;
@@ -624,7 +624,7 @@ void Mesh::CreateShape2(float fSizeX, float fSizeY, float fSizeZ, int nSegment){
 	face[face_idx].vert[2].vertIndex =point_idx + 6;
 	face[face_idx].vert[3].vertIndex =point_idx + 5;
 	for (int i = 0; i < face[face_idx].nVerts; i++)
-		face[face_idx].vert[i].colorIndex = 0;
+		face[face_idx].vert[i].colorIndex = 10;
 
 	// Bottom face
 	face[++face_idx].nVerts = 4;
@@ -634,7 +634,7 @@ void Mesh::CreateShape2(float fSizeX, float fSizeY, float fSizeZ, int nSegment){
 	face[face_idx].vert[2].vertIndex =point_idx + 7;
 	face[face_idx].vert[3].vertIndex =point_idx + 4;
 	for (int i = 0; i < face[face_idx].nVerts; i++)
-		face[face_idx].vert[i].colorIndex = 0;
+		face[face_idx].vert[i].colorIndex = 11;
 
 	/********* CENTER CUBOID *********/
 	// Initialize points
@@ -654,7 +654,7 @@ void Mesh::CreateShape2(float fSizeX, float fSizeY, float fSizeZ, int nSegment){
 	face[face_idx].vert[2].vertIndex = point_idx + 2;
 	face[face_idx].vert[3].vertIndex = point_idx + 3;
 	for (int i = 0; i < face[face_idx].nVerts; i++)
-		face[face_idx].vert[i].colorIndex = 0;
+		face[face_idx].vert[i].colorIndex = 12;
 
 	// Left face
 	face[++face_idx].nVerts = 4;
@@ -664,7 +664,7 @@ void Mesh::CreateShape2(float fSizeX, float fSizeY, float fSizeZ, int nSegment){
 	face[face_idx].vert[2].vertIndex = point_idx + 4;
 	face[face_idx].vert[3].vertIndex = point_idx + 5;
 	for (int i = 0; i < face[face_idx].nVerts; i++)
-		face[face_idx].vert[i].colorIndex = 0;
+		face[face_idx].vert[i].colorIndex = 13;
 
 	// Right face
 	face[++face_idx].nVerts = 4;
@@ -683,7 +683,7 @@ void Mesh::CreateShape2(float fSizeX, float fSizeY, float fSizeZ, int nSegment){
 	face[face_idx].vert[1].vertIndex = point_idx + 2;
 	face[face_idx].vert[2].vertIndex = point_idx + 4;
 	for (int i = 0; i < face[face_idx].nVerts; i++)
-		face[face_idx].vert[i].colorIndex = 0;
+		face[face_idx].vert[i].colorIndex = 1;
 
 	// Bottom face
 	face[++face_idx].nVerts = 3;
@@ -692,7 +692,7 @@ void Mesh::CreateShape2(float fSizeX, float fSizeY, float fSizeZ, int nSegment){
 	face[face_idx].vert[1].vertIndex = point_idx + 3;
 	face[face_idx].vert[2].vertIndex = point_idx + 5;
 	for (int i = 0; i < face[face_idx].nVerts; i++)
-		face[face_idx].vert[i].colorIndex = 0;
+		face[face_idx].vert[i].colorIndex = 2;
 
 	/*************************************** BOTTOM CUBOID *****************************************/
 	/********* LEFT CUBOID *********/
@@ -713,7 +713,7 @@ void Mesh::CreateShape2(float fSizeX, float fSizeY, float fSizeZ, int nSegment){
 	face[face_idx].vert[2].vertIndex = point_idx + 2;
 	face[face_idx].vert[3].vertIndex = point_idx + 3;
 	for (int i = 0; i < face[face_idx].nVerts; i++)
-		face[numCyFaces + 2 * numCubeFaces].vert[i].colorIndex = 0;
+		face[face_idx].vert[i].colorIndex = 3;
 
 	// Left face
 	face[++face_idx].nVerts = 4;
@@ -723,7 +723,7 @@ void Mesh::CreateShape2(float fSizeX, float fSizeY, float fSizeZ, int nSegment){
 	face[face_idx].vert[2].vertIndex = point_idx + 4;
 	face[face_idx].vert[3].vertIndex = point_idx + 5;
 	for (int i = 0; i < face[face_idx].nVerts; i++)
-		face[face_idx].vert[i].colorIndex = 0;
+		face[face_idx].vert[i].colorIndex = 4;
 
 	// Right face
 	face[++face_idx].nVerts = 4;
@@ -733,7 +733,7 @@ void Mesh::CreateShape2(float fSizeX, float fSizeY, float fSizeZ, int nSegment){
 	face[face_idx].vert[2].vertIndex = point_idx + 5;
 	face[face_idx].vert[3].vertIndex = point_idx + 3;
 	for (int i = 0; i < face[face_idx].nVerts; i++)
-		face[face_idx].vert[i].colorIndex = 0;
+		face[face_idx].vert[i].colorIndex = 5;
 
 	// Top face
 	face[++face_idx].nVerts = 3;
@@ -742,7 +742,7 @@ void Mesh::CreateShape2(float fSizeX, float fSizeY, float fSizeZ, int nSegment){
 	face[face_idx].vert[1].vertIndex = point_idx + 2;
 	face[face_idx].vert[2].vertIndex = point_idx + 4;
 	for (int i = 0; i < face[face_idx].nVerts; i++)
-		face[face_idx].vert[i].colorIndex = 0;
+		face[face_idx].vert[i].colorIndex = 6;
 
 	// Bottom face
 	face[++face_idx].nVerts = 3;
@@ -751,7 +751,7 @@ void Mesh::CreateShape2(float fSizeX, float fSizeY, float fSizeZ, int nSegment){
 	face[face_idx].vert[1].vertIndex = point_idx + 3;
 	face[face_idx].vert[2].vertIndex = point_idx + 5;
 	for (int i = 0; i < face[face_idx].nVerts; i++)
-		face[face_idx].vert[i].colorIndex = 0;
+		face[face_idx].vert[i].colorIndex = 7;
 
 
 	/********* CENTER CUBOID *********/
@@ -772,7 +772,7 @@ void Mesh::CreateShape2(float fSizeX, float fSizeY, float fSizeZ, int nSegment){
 	face[face_idx].vert[2].vertIndex = point_idx + 2;
 	face[face_idx].vert[3].vertIndex = point_idx + 3;
 	for (int i = 0; i < face[face_idx].nVerts; i++)
-		face[numCyFaces + 2 * numCubeFaces].vert[i].colorIndex = 0;
+		face[face_idx].vert[i].colorIndex = 8;
 
 	// Left face
 	face[++face_idx].nVerts = 4;
@@ -782,7 +782,7 @@ void Mesh::CreateShape2(float fSizeX, float fSizeY, float fSizeZ, int nSegment){
 	face[face_idx].vert[2].vertIndex = point_idx + 4;
 	face[face_idx].vert[3].vertIndex = point_idx + 5;
 	for (int i = 0; i < face[face_idx].nVerts; i++)
-		face[face_idx].vert[i].colorIndex = 0;
+		face[face_idx].vert[i].colorIndex = 9;
 
 	// Right face
 	face[++face_idx].nVerts = 4;
@@ -792,7 +792,7 @@ void Mesh::CreateShape2(float fSizeX, float fSizeY, float fSizeZ, int nSegment){
 	face[face_idx].vert[2].vertIndex = point_idx + 4;
 	face[face_idx].vert[3].vertIndex = point_idx + 5;
 	for (int i = 0; i < face[face_idx].nVerts; i++)
-		face[face_idx].vert[i].colorIndex = 0;
+		face[face_idx].vert[i].colorIndex = 10;
 
 	// Top face
 	face[++face_idx].nVerts = 3;
@@ -801,7 +801,7 @@ void Mesh::CreateShape2(float fSizeX, float fSizeY, float fSizeZ, int nSegment){
 	face[face_idx].vert[1].vertIndex = point_idx + 2;
 	face[face_idx].vert[2].vertIndex = point_idx + 4;
 	for (int i = 0; i < face[face_idx].nVerts; i++)
-		face[face_idx].vert[i].colorIndex = 0;
+		face[face_idx].vert[i].colorIndex = 11;
 
 	// Bottom face
 	face[++face_idx].nVerts = 3;
@@ -810,7 +810,7 @@ void Mesh::CreateShape2(float fSizeX, float fSizeY, float fSizeZ, int nSegment){
 	face[face_idx].vert[1].vertIndex = point_idx + 3;
 	face[face_idx].vert[2].vertIndex = point_idx + 5;
 	for (int i = 0; i < face[face_idx].nVerts; i++)
-		face[face_idx].vert[i].colorIndex = 0;
+		face[face_idx].vert[i].colorIndex = 12;
 
 	/********* RIGHT CUBOID *********/
 	// Initialize points
@@ -830,7 +830,7 @@ void Mesh::CreateShape2(float fSizeX, float fSizeY, float fSizeZ, int nSegment){
 	face[face_idx].vert[2].vertIndex = point_idx + 2;
 	face[face_idx].vert[3].vertIndex = point_idx + 3;
 	for (int i = 0; i < face[face_idx].nVerts; i++)
-		face[face_idx].vert[i].colorIndex = 0;
+		face[face_idx].vert[i].colorIndex = 13;
 
 	// Left face
 	face[++face_idx].nVerts = 4;
@@ -850,7 +850,7 @@ void Mesh::CreateShape2(float fSizeX, float fSizeY, float fSizeZ, int nSegment){
 	face[face_idx].vert[2].vertIndex = point_idx + 5;
 	face[face_idx].vert[3].vertIndex = point_idx + 4;
 	for (int i = 0; i < face[face_idx].nVerts; i++)
-		face[face_idx].vert[i].colorIndex = 0;
+		face[face_idx].vert[i].colorIndex = 1;
 
 	// Top face
 	face[++face_idx].nVerts = 3;
@@ -859,7 +859,7 @@ void Mesh::CreateShape2(float fSizeX, float fSizeY, float fSizeZ, int nSegment){
 	face[face_idx].vert[1].vertIndex = point_idx + 2;
 	face[face_idx].vert[2].vertIndex = point_idx + 4;
 	for (int i = 0; i < face[face_idx].nVerts; i++)
-		face[face_idx].vert[i].colorIndex = 0;
+		face[face_idx].vert[i].colorIndex = 2;
 
 	// Bottom face
 	face[++face_idx].nVerts = 3;
@@ -868,7 +868,7 @@ void Mesh::CreateShape2(float fSizeX, float fSizeY, float fSizeZ, int nSegment){
 	face[face_idx].vert[1].vertIndex = point_idx + 3;
 	face[face_idx].vert[2].vertIndex = point_idx + 5;
 	for (int i = 0; i < face[face_idx].nVerts; i++)
-		face[face_idx].vert[i].colorIndex = 0;
+		face[face_idx].vert[i].colorIndex = 3;
 
 	/*************************************** BOTTOM TETRAHEDRON *****************************************/
 	// Ininitalize points
@@ -967,7 +967,7 @@ void Mesh::CreateShape3(float fSizeX, float fSizeY, float fSizeZ, float fRadius,
 	face[face_idx].vert[2].vertIndex = point_idx + 6;
 	face[face_idx].vert[3].vertIndex = point_idx + 7;
 	for (int i = 0; i < face[face_idx].nVerts; i++)
-		face[face_idx].vert[i].colorIndex = 0;
+		face[face_idx].vert[i].colorIndex = 1;
 
 	// Left face
 	face[++face_idx].nVerts = 4;
@@ -977,7 +977,7 @@ void Mesh::CreateShape3(float fSizeX, float fSizeY, float fSizeZ, float fRadius,
 	face[face_idx].vert[2].vertIndex = point_idx + 5;
 	face[face_idx].vert[3].vertIndex = point_idx + 4;
 	for (int i = 0; i < face[face_idx].nVerts; i++)
-		face[face_idx].vert[i].colorIndex = 0;
+		face[face_idx].vert[i].colorIndex = 2;
 
 	// Right face
 	face[++face_idx].nVerts = 4;
@@ -987,7 +987,7 @@ void Mesh::CreateShape3(float fSizeX, float fSizeY, float fSizeZ, float fRadius,
 	face[face_idx].vert[2].vertIndex = point_idx + 6;
 	face[face_idx].vert[3].vertIndex = point_idx + 7;
 	for (int i = 0; i < face[face_idx].nVerts; i++)
-		face[face_idx].vert[i].colorIndex = 0;
+		face[face_idx].vert[i].colorIndex = 3;
 
 	// Top face
 	face[++face_idx].nVerts = 4;
@@ -997,7 +997,7 @@ void Mesh::CreateShape3(float fSizeX, float fSizeY, float fSizeZ, float fRadius,
 	face[face_idx].vert[2].vertIndex = point_idx + 6;
 	face[face_idx].vert[3].vertIndex = point_idx + 5;
 	for (int i = 0; i < face[face_idx].nVerts; i++)
-		face[face_idx].vert[i].colorIndex = 0;
+		face[face_idx].vert[i].colorIndex = 4;
 
 	// Bottom face
 	face[++face_idx].nVerts = 4;
@@ -1007,7 +1007,7 @@ void Mesh::CreateShape3(float fSizeX, float fSizeY, float fSizeZ, float fRadius,
 	face[face_idx].vert[2].vertIndex = point_idx + 7;
 	face[face_idx].vert[3].vertIndex = point_idx + 4;
 	for (int i = 0; i < face[face_idx].nVerts; i++)
-		face[face_idx].vert[i].colorIndex = 0;
+		face[face_idx].vert[i].colorIndex = 5;
 
 	float distZ = 1.5 * fSizeZ;
 	float distX = (fSizeX - fSizeX2) / 2;
@@ -1081,7 +1081,7 @@ void Mesh::CreateShape3(float fSizeX, float fSizeY, float fSizeZ, float fRadius,
 	face[face_idx].vert[2].vertIndex = point_idx + 2;
 	face[face_idx].vert[3].vertIndex = point_idx + 3;
 	for (int i = 0; i < face[face_idx].nVerts; i++)
-		face[face_idx].vert[i].colorIndex = 0;
+		face[face_idx].vert[i].colorIndex = 6;
 
 	// Left face
 	face[++face_idx].nVerts = 4;
@@ -1091,7 +1091,7 @@ void Mesh::CreateShape3(float fSizeX, float fSizeY, float fSizeZ, float fRadius,
 	face[face_idx].vert[2].vertIndex = point_idx + 4;
 	face[face_idx].vert[3].vertIndex = point_idx + 5;
 	for (int i = 0; i < face[face_idx].nVerts; i++)
-		face[face_idx].vert[i].colorIndex = 0;
+		face[face_idx].vert[i].colorIndex = 7;
 
 	// Right face
 	face[++face_idx].nVerts = 4;
@@ -1101,7 +1101,7 @@ void Mesh::CreateShape3(float fSizeX, float fSizeY, float fSizeZ, float fRadius,
 	face[face_idx].vert[2].vertIndex = point_idx + 5;
 	face[face_idx].vert[3].vertIndex = point_idx + 4;
 	for (int i = 0; i < face[face_idx].nVerts; i++)
-		face[face_idx].vert[i].colorIndex = 0;
+		face[face_idx].vert[i].colorIndex = 8;
 
 	// Top face
 	face[++face_idx].nVerts = 3;
@@ -1110,7 +1110,7 @@ void Mesh::CreateShape3(float fSizeX, float fSizeY, float fSizeZ, float fRadius,
 	face[face_idx].vert[1].vertIndex = point_idx + 2;
 	face[face_idx].vert[2].vertIndex = point_idx + 4;
 	for (int i = 0; i < face[face_idx].nVerts; i++)
-		face[face_idx].vert[i].colorIndex = 0;
+		face[face_idx].vert[i].colorIndex = 9;
 
 	// Bottom face
 	face[++face_idx].nVerts = 3;
@@ -1119,7 +1119,7 @@ void Mesh::CreateShape3(float fSizeX, float fSizeY, float fSizeZ, float fRadius,
 	face[face_idx].vert[1].vertIndex = point_idx + 3;
 	face[face_idx].vert[2].vertIndex = point_idx + 5;
 	for (int i = 0; i < face[face_idx].nVerts; i++)
-		face[face_idx].vert[i].colorIndex = 0;
+		face[face_idx].vert[i].colorIndex = 10;
 
 	/********* LEFT TETRAHEDRON *********/
 	// Initialize points
@@ -1139,7 +1139,7 @@ void Mesh::CreateShape3(float fSizeX, float fSizeY, float fSizeZ, float fRadius,
 	face[face_idx].vert[2].vertIndex = point_idx + 2;
 	face[face_idx].vert[3].vertIndex = point_idx + 3;
 	for (int i = 0; i < face[face_idx].nVerts; i++)
-		face[face_idx].vert[i].colorIndex = 0;
+		face[face_idx].vert[i].colorIndex = 11;
 
 	// Left face
 	face[++face_idx].nVerts = 4;
@@ -1149,7 +1149,7 @@ void Mesh::CreateShape3(float fSizeX, float fSizeY, float fSizeZ, float fRadius,
 	face[face_idx].vert[2].vertIndex = point_idx + 4;
 	face[face_idx].vert[3].vertIndex = point_idx + 5;
 	for (int i = 0; i < face[face_idx].nVerts; i++)
-		face[face_idx].vert[i].colorIndex = 0;
+		face[face_idx].vert[i].colorIndex = 12;
 
 	// Right face
 	face[++face_idx].nVerts = 4;
@@ -1159,7 +1159,7 @@ void Mesh::CreateShape3(float fSizeX, float fSizeY, float fSizeZ, float fRadius,
 	face[face_idx].vert[2].vertIndex = point_idx + 5;
 	face[face_idx].vert[3].vertIndex = point_idx + 4;
 	for (int i = 0; i < face[face_idx].nVerts; i++)
-		face[face_idx].vert[i].colorIndex = 0;
+		face[face_idx].vert[i].colorIndex = 13;
 
 	// Top face
 	face[++face_idx].nVerts = 3;
@@ -1177,7 +1177,7 @@ void Mesh::CreateShape3(float fSizeX, float fSizeY, float fSizeZ, float fRadius,
 	face[face_idx].vert[1].vertIndex = point_idx + 3;
 	face[face_idx].vert[2].vertIndex = point_idx + 5;
 	for (int i = 0; i < face[face_idx].nVerts; i++)
-		face[face_idx].vert[i].colorIndex = 0;
+		face[face_idx].vert[i].colorIndex = 1;
 
 	/********* RIGHT TETRAHEDRON *********/
 	// Initialize points
@@ -1197,7 +1197,7 @@ void Mesh::CreateShape3(float fSizeX, float fSizeY, float fSizeZ, float fRadius,
 	face[face_idx].vert[2].vertIndex = point_idx + 2;
 	face[face_idx].vert[3].vertIndex = point_idx + 3;
 	for (int i = 0; i < face[face_idx].nVerts; i++)
-		face[face_idx].vert[i].colorIndex = 0;
+		face[face_idx].vert[i].colorIndex = 2;
 
 	// Left face
 	face[++face_idx].nVerts = 4;
@@ -1207,7 +1207,7 @@ void Mesh::CreateShape3(float fSizeX, float fSizeY, float fSizeZ, float fRadius,
 	face[face_idx].vert[2].vertIndex = point_idx + 4;
 	face[face_idx].vert[3].vertIndex = point_idx + 5;
 	for (int i = 0; i < face[face_idx].nVerts; i++)
-		face[face_idx].vert[i].colorIndex = 0;
+		face[face_idx].vert[i].colorIndex = 3;
 
 	// Right face
 	face[++face_idx].nVerts = 4;
@@ -1217,7 +1217,7 @@ void Mesh::CreateShape3(float fSizeX, float fSizeY, float fSizeZ, float fRadius,
 	face[face_idx].vert[2].vertIndex = point_idx + 5;
 	face[face_idx].vert[3].vertIndex = point_idx + 4;
 	for (int i = 0; i < face[face_idx].nVerts; i++)
-		face[face_idx].vert[i].colorIndex = 0;
+		face[face_idx].vert[i].colorIndex = 4;
 
 	// Top face
 	face[++face_idx].nVerts = 3;
@@ -1226,7 +1226,7 @@ void Mesh::CreateShape3(float fSizeX, float fSizeY, float fSizeZ, float fRadius,
 	face[face_idx].vert[1].vertIndex = point_idx + 2;
 	face[face_idx].vert[2].vertIndex = point_idx + 4;
 	for (int i = 0; i < face[face_idx].nVerts; i++)
-		face[face_idx].vert[i].colorIndex = 0;
+		face[face_idx].vert[i].colorIndex = 5;
 
 	// Bottom face
 	face[++face_idx].nVerts = 3;
@@ -1235,7 +1235,7 @@ void Mesh::CreateShape3(float fSizeX, float fSizeY, float fSizeZ, float fRadius,
 	face[face_idx].vert[1].vertIndex = point_idx + 3;
 	face[face_idx].vert[2].vertIndex = point_idx + 5;
 	for (int i = 0; i < face[face_idx].nVerts; i++)
-		face[face_idx].vert[i].colorIndex = 0;
+		face[face_idx].vert[i].colorIndex = 6;
 }
 
 void Mesh::CreateShape4(float fSizeX, float fSizeY, float fSizeZ, float fRadius, int nSegment)
@@ -1343,7 +1343,7 @@ void Mesh::CreateShape4(float fSizeX, float fSizeY, float fSizeZ, float fRadius,
 	face[face_idx].vert[2].vertIndex = point_idx + 6;
 	face[face_idx].vert[3].vertIndex = point_idx + 7;
 	for (int i = 0; i < face[face_idx].nVerts; i++)
-		face[face_idx].vert[i].colorIndex = 0;
+		face[face_idx].vert[i].colorIndex = 1;
 
 	// Left face
 	face[++face_idx].nVerts = 4;
@@ -1353,7 +1353,7 @@ void Mesh::CreateShape4(float fSizeX, float fSizeY, float fSizeZ, float fRadius,
 	face[face_idx].vert[2].vertIndex = point_idx + 5;
 	face[face_idx].vert[3].vertIndex = point_idx + 4;
 	for (int i = 0; i < face[face_idx].nVerts; i++)
-		face[face_idx].vert[i].colorIndex = 0;
+		face[face_idx].vert[i].colorIndex = 2;
 
 	// Right face
 	face[++face_idx].nVerts = 4;
@@ -1363,7 +1363,7 @@ void Mesh::CreateShape4(float fSizeX, float fSizeY, float fSizeZ, float fRadius,
 	face[face_idx].vert[2].vertIndex = point_idx + 6;
 	face[face_idx].vert[3].vertIndex = point_idx + 7;
 	for (int i = 0; i < face[face_idx].nVerts; i++)
-		face[face_idx].vert[i].colorIndex = 0;
+		face[face_idx].vert[i].colorIndex = 3;
 
 	// Top face
 	face[++face_idx].nVerts = 4;
@@ -1373,7 +1373,7 @@ void Mesh::CreateShape4(float fSizeX, float fSizeY, float fSizeZ, float fRadius,
 	face[face_idx].vert[2].vertIndex = point_idx + 6;
 	face[face_idx].vert[3].vertIndex = point_idx + 5;
 	for (int i = 0; i < face[face_idx].nVerts; i++)
-		face[face_idx].vert[i].colorIndex = 0;
+		face[face_idx].vert[i].colorIndex = 4;
 
 	// Bottom face
 	face[++face_idx].nVerts = 4;
@@ -1383,7 +1383,7 @@ void Mesh::CreateShape4(float fSizeX, float fSizeY, float fSizeZ, float fRadius,
 	face[face_idx].vert[2].vertIndex = point_idx + 7;
 	face[face_idx].vert[3].vertIndex = point_idx + 4;
 	for (int i = 0; i < face[face_idx].nVerts; i++)
-		face[face_idx].vert[i].colorIndex = 0;
+		face[face_idx].vert[i].colorIndex = 5;
 
 	/*************************************** LEFT TOP TETRAHEDRON *****************************************/
 	// Initialize points
@@ -1403,7 +1403,7 @@ void Mesh::CreateShape4(float fSizeX, float fSizeY, float fSizeZ, float fRadius,
 	face[face_idx].vert[2].vertIndex = point_idx + 2;
 	face[face_idx].vert[3].vertIndex = point_idx + 3;
 	for (int i = 0; i < face[face_idx].nVerts; i++)
-		face[face_idx].vert[i].colorIndex = 0;
+		face[face_idx].vert[i].colorIndex = 6;
 
 	// Left face
 	face[++face_idx].nVerts = 4;
@@ -1413,7 +1413,7 @@ void Mesh::CreateShape4(float fSizeX, float fSizeY, float fSizeZ, float fRadius,
 	face[face_idx].vert[2].vertIndex = point_idx + 4;
 	face[face_idx].vert[3].vertIndex = point_idx + 5;
 	for (int i = 0; i < face[face_idx].nVerts; i++)
-		face[face_idx].vert[i].colorIndex = 0;
+		face[face_idx].vert[i].colorIndex = 7;
 
 	// Right face
 	face[++face_idx].nVerts = 4;
@@ -1423,7 +1423,7 @@ void Mesh::CreateShape4(float fSizeX, float fSizeY, float fSizeZ, float fRadius,
 	face[face_idx].vert[2].vertIndex = point_idx + 5;
 	face[face_idx].vert[3].vertIndex = point_idx + 4;
 	for (int i = 0; i < face[face_idx].nVerts; i++)
-		face[face_idx].vert[i].colorIndex = 0;
+		face[face_idx].vert[i].colorIndex = 8;
 
 	// Top face
 	face[++face_idx].nVerts = 3;
@@ -1432,7 +1432,7 @@ void Mesh::CreateShape4(float fSizeX, float fSizeY, float fSizeZ, float fRadius,
 	face[face_idx].vert[1].vertIndex = point_idx + 2;
 	face[face_idx].vert[2].vertIndex = point_idx + 4;
 	for (int i = 0; i < face[face_idx].nVerts; i++)
-		face[face_idx].vert[i].colorIndex = 0;
+		face[face_idx].vert[i].colorIndex = 9;
 
 	// Bottom face
 	face[++face_idx].nVerts = 3;
@@ -1441,7 +1441,7 @@ void Mesh::CreateShape4(float fSizeX, float fSizeY, float fSizeZ, float fRadius,
 	face[face_idx].vert[1].vertIndex = point_idx + 3;
 	face[face_idx].vert[2].vertIndex = point_idx + 5;
 	for (int i = 0; i < face[face_idx].nVerts; i++)
-		face[face_idx].vert[i].colorIndex = 0;
+		face[face_idx].vert[i].colorIndex = 10;
 
 	/*************************************** RIGHT TOP TETRAHEDRON *****************************************/
 	// Initialize points
@@ -1461,7 +1461,7 @@ void Mesh::CreateShape4(float fSizeX, float fSizeY, float fSizeZ, float fRadius,
 	face[face_idx].vert[2].vertIndex = point_idx + 2;
 	face[face_idx].vert[3].vertIndex = point_idx + 3;
 	for (int i = 0; i < face[face_idx].nVerts; i++)
-		face[face_idx].vert[i].colorIndex = 0;
+		face[face_idx].vert[i].colorIndex = 11;
 
 	// Left face
 	face[++face_idx].nVerts = 4;
@@ -1471,7 +1471,7 @@ void Mesh::CreateShape4(float fSizeX, float fSizeY, float fSizeZ, float fRadius,
 	face[face_idx].vert[2].vertIndex = point_idx + 4;
 	face[face_idx].vert[3].vertIndex = point_idx + 5;
 	for (int i = 0; i < face[face_idx].nVerts; i++)
-		face[face_idx].vert[i].colorIndex = 0;
+		face[face_idx].vert[i].colorIndex = 12;
 
 	// Right face
 	face[++face_idx].nVerts = 4;
@@ -1481,7 +1481,7 @@ void Mesh::CreateShape4(float fSizeX, float fSizeY, float fSizeZ, float fRadius,
 	face[face_idx].vert[2].vertIndex = point_idx + 5;
 	face[face_idx].vert[3].vertIndex = point_idx + 4;
 	for (int i = 0; i < face[face_idx].nVerts; i++)
-		face[face_idx].vert[i].colorIndex = 0;
+		face[face_idx].vert[i].colorIndex = 13;
 
 	// Top face
 	face[++face_idx].nVerts = 3;
@@ -1499,7 +1499,7 @@ void Mesh::CreateShape4(float fSizeX, float fSizeY, float fSizeZ, float fRadius,
 	face[face_idx].vert[1].vertIndex = point_idx + 3;
 	face[face_idx].vert[2].vertIndex = point_idx + 5;
 	for (int i = 0; i < face[face_idx].nVerts; i++)
-		face[face_idx].vert[i].colorIndex = 0;
+		face[face_idx].vert[i].colorIndex = 1;
 }
 
 void Mesh::CreateShape5(float fSizeX, float fSizeY, float fSizeZ, int nSegment)
@@ -1513,7 +1513,7 @@ void Mesh::CreateShape5(float fSizeX, float fSizeY, float fSizeZ, int nSegment)
 	pt = new Point3[numVerts];
 
 	int numCyFaces = nSegment * 2;
-	numFaces = numCyFaces * 2 + 2;
+	numFaces = numCyFaces * 2 + 4;
 	face = new Face[numFaces];
 
 	float fAngle = PI / nSegment;
@@ -1566,11 +1566,18 @@ void Mesh::CreateShape5(float fSizeX, float fSizeY, float fSizeZ, int nSegment)
 
 	int top_face_idx = face_idx + 1;
 	int below_face_idx = face_idx + 2;
+	int left_face_idx = face_idx + 3;
+	int right_face_idx = face_idx + 4;
 
 	face[top_face_idx].nVerts = numCyVerts;
 	face[top_face_idx].vert = new VertexID[face[top_face_idx].nVerts];
 	face[below_face_idx].nVerts = numCyVerts;
 	face[below_face_idx].vert = new VertexID[face[below_face_idx].nVerts];
+
+	face[left_face_idx].nVerts = 4;
+	face[left_face_idx].vert = new VertexID[face[left_face_idx].nVerts];
+	face[right_face_idx].nVerts = 4;
+	face[right_face_idx].vert = new VertexID[face[right_face_idx].nVerts];
 
 	int top_idx = -1;
 	int below_idx = -1;
@@ -1588,6 +1595,35 @@ void Mesh::CreateShape5(float fSizeX, float fSizeY, float fSizeZ, int nSegment)
 			face[top_face_idx].vert[++top_idx].vertIndex = i;
 		else
 			face[below_face_idx].vert[++below_idx].vertIndex = i;
+	}
+
+	face[left_face_idx].vert[0].vertIndex = (nSegment + 1) - 1;
+	face[left_face_idx].vert[1].vertIndex = 2 * (nSegment + 1) - 1;
+	face[left_face_idx].vert[2].vertIndex = 3 * (nSegment + 1);
+	face[left_face_idx].vert[3].vertIndex = 2 * (nSegment + 1);
+
+	face[right_face_idx].vert[0].vertIndex = 0;
+	face[right_face_idx].vert[1].vertIndex = (nSegment + 1);
+	face[right_face_idx].vert[2].vertIndex = 4 * (nSegment + 1) - 1;
+	face[right_face_idx].vert[3].vertIndex = 3 * (nSegment + 1) - 1;
+
+}
+
+void Mesh::CalculateFacesNorm()
+{
+	for (int f = 0; f < numFaces; f++)
+	{
+		float fX = 0, fY = 0, fZ = 0;
+		for (int v = 0; v < face[f].nVerts; v++)
+		{
+			int iv = face[f].vert[v].vertIndex;
+			int next = face[f].vert[(v + 1) % face[f].nVerts].vertIndex;
+			fX += (pt[iv].y - pt[next].y) * (pt[iv].z + pt[next].z);
+			fY += (pt[iv].z - pt[next].z) * (pt[iv].x + pt[next].x);
+			fZ += (pt[iv].x - pt[next].x) * (pt[iv].y + pt[next].y);
+		}
+		face[f].facenorm.set(fX, fY, fZ);
+		face[f].facenorm.normalize();
 	}
 }
 
@@ -1618,11 +1654,46 @@ void Mesh::DrawColor()
 			int iv = face[f].vert[v].vertIndex;
 			int ic = face[f].vert[v].colorIndex;
 
-			ic = f % COLORNUM;
+			// Uncomment this line to show every face unique color.
+			//ic = f % COLORNUM;
 
 			glColor3f(ColorArr[ic][0], ColorArr[ic][1], ColorArr[ic][2]);
 			glVertex3f(pt[iv].x, pt[iv].y, pt[iv].z);
 		}
 		glEnd();
 	}
+}
+
+void Mesh::SetColor(int colorIdx)
+{
+	for (int f = 0; f < numFaces; f++)
+	{
+		for (int v = 0; v < face[f].nVerts; v++)
+		{
+			face[f].vert[v].colorIndex = colorIdx;
+		}
+	}
+}
+
+void Mesh::Draw()
+{
+	for (int f = 0; f < numFaces; f++)
+	{
+		glBegin(GL_POLYGON);
+		for (int v = 0; v < face[f].nVerts; v++)
+		{
+			int iv = face[f].vert[v].vertIndex;
+			glNormal3f(face[f].facenorm.x, face[f].facenorm.y, face[f].facenorm.z);
+			glVertex3f(pt[iv].x, pt[iv].y, pt[iv].z);
+		}
+		glEnd();
+	}
+}
+
+void Mesh::SetupMaterial(float ambient[], float diffuse[], float specular[], float shiness)
+{
+	glMaterialfv(GL_FRONT_AND_BACK, GL_AMBIENT, ambient);
+	glMaterialfv(GL_FRONT_AND_BACK, GL_DIFFUSE, diffuse);
+	glMaterialfv(GL_FRONT_AND_BACK, GL_SPECULAR, specular);
+	glMaterialf(GL_FRONT_AND_BACK, GL_SHININESS, shiness);
 }

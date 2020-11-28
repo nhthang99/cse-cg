@@ -16,6 +16,7 @@ class Face
 public:
 	int		nVerts;
 	VertexID*	vert;
+	Vector3 facenorm;
 	
 	Face()
 	{
@@ -41,6 +42,10 @@ public:
 	
 	int		numFaces;
 	Face*		face;
+
+	float slideX, slideY, slideZ;
+	float rotateX, rotateY, rotateZ;
+	float scaleX, scaleY, scaleZ;
 public:
 	Mesh()
 	{
@@ -48,6 +53,16 @@ public:
 		pt		= NULL;
 		numFaces	= 0;
 		face		= NULL;
+
+		slideX = 0;
+		slideY = 0;
+		slideZ = 0;
+		rotateX = 0;
+		rotateY = 0;
+		rotateZ = 0;
+		scaleX = 0;
+		scaleY = 0;
+		scaleZ = 0;
 	}
 	~Mesh()
 	{
@@ -64,6 +79,11 @@ public:
 	}
 	void DrawWireframe();
 	void DrawColor();
+	void Draw();
+	void SetColor(int colorIdx);
+
+	void CalculateFacesNorm();
+	void SetupMaterial(float ambient[], float diffuse[], float specular[], float shiness);
 
 	void CreateTetrahedron();
 	void CreateCube(float	fSize);
