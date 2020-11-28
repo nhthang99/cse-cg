@@ -435,7 +435,7 @@ void Mesh::CreateShape2(float fSizeX, float fSizeY, float fSizeZ, int nSegment){
 	float x, y, z;
 
 	float fSizeX2 = 3 * fSizeX / 2;
-	float fSizeZ2 = 4 * fSizeZ / 5;
+	float fSizeZ2 = 7 * fSizeZ / 8;
 
 	float fSizeZ3 = fSizeZ / 2;
 
@@ -916,7 +916,7 @@ void Mesh::CreateShape2(float fSizeX, float fSizeY, float fSizeZ, int nSegment){
 	}
 }
 
-void Mesh::CreateShape3(float fSizeX, float fSizeY, float fSizeZ, float fRadius, int nSegment)
+void Mesh::CreateShape3(float fSizeX, float fSizeY, float fSizeZ, float fSizeX2, float fRadius, int nSegment)
 {
 	int i;
 	float x, y, z;
@@ -927,10 +927,6 @@ void Mesh::CreateShape3(float fSizeX, float fSizeY, float fSizeZ, float fRadius,
 	int numCyVerts = (nSegment + 1) * 2 + 2;
 	numVerts = numCuboidVerts + numCyVerts + numTriVerts * 3;
 	pt = new Point3[numVerts];
-
-	/*fSizeX *= 2;
-	fSizeZ *= 2;*/
-	float fSizeX2 = fSizeX / 1.5;
 
 	int numCyFaces = nSegment * 3;
 	int numCubeFaces = 6;
@@ -1502,7 +1498,7 @@ void Mesh::CreateShape4(float fSizeX, float fSizeY, float fSizeZ, float fRadius,
 		face[face_idx].vert[i].colorIndex = 1;
 }
 
-void Mesh::CreateShape5(float fSizeX, float fSizeY, float fSizeZ, int nSegment)
+void Mesh::CreateShape5(float fSizeX, float fSizeY, float fSizeZ, float fRadius, int nSegment)
 {
 	int i;
 	float x, y, z;
@@ -1517,7 +1513,6 @@ void Mesh::CreateShape5(float fSizeX, float fSizeY, float fSizeZ, int nSegment)
 	face = new Face[numFaces];
 
 	float fAngle = PI / nSegment;
-	float fRadius = fSizeX / 4;
 
 	for (i = 0; i < nSegment + 1; i++)
 	{

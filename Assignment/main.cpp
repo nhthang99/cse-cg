@@ -30,22 +30,70 @@ Mesh 	shape2;
 Mesh 	shape3;
 Mesh 	shape4;
 Mesh	shape5;
+Mesh	chot1;
+Mesh	chot2;
+Mesh	chot3;
+Mesh	chot4;
+
+int nSegment = 32;
+float distanceLeftXBase = 1;
+float distanceRightXBase = 1.5;
 
 // Base size
-float fSizeXBase = 2;
+float fSizeXBase = 7.0;
 float fSizeYBase = 0.25;
-float fSizeZBase = 6;
+float fSizeZBase = 1.6;
+
+// Shape 1 size
+float fSizeXShape1 = fSizeXBase / 2 - distanceLeftXBase / 2;
+float fSizeYShape1 = fSizeYBase * 1.5;
+float fSizeZShape1 = 0.65;
+float fRadiusShape1 = 0.9;
+
+// Shape 2 size
+float fSizeXShape2 = 3.5;
+float fSizeYShape2 = fSizeYBase * 1.5;
+float fSizeZShape2 = 0.6;
+
+// Shape 3 size
+float fSizeXShape3 = fSizeXBase - distanceLeftXBase * 2;
+float fSizeYShape3 = fSizeYBase * 1.5;
+float fSizeZShape3 = 1.0;
+float fSizeX2Shape3 = fSizeXShape3 / 1.5;
+float fRadiusShape3 = 0.4;
+
+// Shape 4 size
+float fSizeXShape4 = 4;
+float fSizeYShape4 = fSizeYBase * 1.5;
+float fSizeZShape4 = 2.4;
+float fRadiusShape4 = 0.6;
+
+// Shape 5 size
+float fSizeXShape5 = 1.8;
+float fSizeYShape5 = fSizeYBase * 1.5;
+float fSizeZShape5 = 2;
+float fRadiusShape5 = fSizeXShape5 / 3.2;
+
+// Chot size
+float fHeightChot = fSizeYBase * 6 + 0.2;
+float fRadiusChot = 0.2;
 
 void drawAxis()
 {
-	glColor3f(0, 0, 1);
+	glColor3f(1, 0, 0);
 	glBegin(GL_LINES);
 	glVertex3f(0, 0, 0);
 	glVertex3f(4, 0, 0);
+	glEnd();
 
+	glBegin(GL_LINES);
+	glColor3f(0, 1, 0);
 	glVertex3f(0, 0, 0);
 	glVertex3f(0, 4, 0);
+	glEnd();
 
+	glBegin(GL_LINES);
+	glColor3f(0, 0, 1);
 	glVertex3f(0, 0, 0);
 	glVertex3f(0, 0, 4);
 	glEnd();
@@ -60,8 +108,7 @@ void drawBase()
 {
 	glPushMatrix();
 
-	//glTranslated(0, 0, 0);
-	//glRotatef(0, 0, 2, 0);
+	glTranslated(0, fSizeYBase, 0);
 
 	// Dark violet material
 	GLfloat ambient[] = { 0.0, 1.0, 0.0, 1.0 };
@@ -82,14 +129,20 @@ void drawShape1()
 {
 	glPushMatrix();
 
-	//glTranslated(0, 0, 0);
-	glRotatef(0, 0, 2, 0);
+	float distXShape3 = fSizeXShape3 - fSizeX2Shape3;
+	float halfXShape1 = (fSizeXShape1 * 2 + fRadiusShape1) / 2;
+
+	float translateXright = fSizeXShape1 + fRadiusShape1;
+	float translateXleft = distanceLeftXBase + distXShape3 / 2 + halfXShape1;
+
+	glTranslated(translateXright - translateXleft, fSizeYBase * 2 + fSizeZShape1 + fSizeZShape3, -fSizeYShape1);
+	glRotatef(90, 1, 0, 0);
 
 	// Blue material
 	GLfloat ambient[] = { 0.0, 0.0, 0.0, 1.0 };
-	GLfloat diffuse[] = { 0.2, 0.2, 1.0, 1.0 };
+	GLfloat diffuse[] = { 0.0, 1.0, 0.0, 1.0 };
 	GLfloat specular[] = { 0.0, 0.0, 0.0, 1.0 };
-	GLfloat shininess = 100.0;
+	GLfloat shininess = 40.0;
 	shape1.SetupMaterial(ambient, diffuse, specular, shininess);
 
 	if (isFrame)
@@ -104,14 +157,23 @@ void drawShape2()
 {
 	glPushMatrix();
 
-	glTranslated(0, 10, 0);
-	//glRotatef(0, 0, 1, 0);
+	float distBaseY = 2 * fSizeYBase + fSizeZShape2;
+	float fRadiusShape2 = 4 * fSizeZShape2 / 5;
+
+	float halfDistXShape3 = (fSizeXShape3 - fSizeX2Shape3) / 2;
+	float halfXShape1 = (fSizeXShape1 * 2 + fRadiusShape1) / 2;
+
+	float distX = halfXShape1 - (halfDistXShape3 + distanceLeftXBase) - fRadiusShape5 * 2;
+
+	glTranslated(fSizeXShape2 + fRadiusShape2 + distX, distBaseY + fSizeZShape3 + fSizeXShape5, -fSizeYShape2);
+	glRotatef(-90, 1, 0, 0);
+	//glRotatef(-15, 0, 1, 0);
 
 	// Red material
 	GLfloat ambient[] = { 0.0, 0.0, 0.0, 1.0 };
 	GLfloat diffuse[] = { 1.0, 0.0, 0.0, 1.0 };
 	GLfloat specular[] = { 0.0, 0.0, 0.0, 1.0 };
-	GLfloat shininess = 100.0;
+	GLfloat shininess = 40.0;
 	shape2.SetupMaterial(ambient, diffuse, specular, shininess);
 
 	if (isFrame)
@@ -126,14 +188,15 @@ void drawShape3()
 {
 	glPushMatrix();
 
-	glTranslated(0, 10, 0);
-	//glRotatef(0, 0, 1, 0);
+	glTranslated(-(fSizeXShape3 + distanceLeftXBase), 2 * fSizeYBase, fSizeYShape3);
+	glRotatef(180, 0, 1, 0);
+	glRotatef(-90, 1, 0, 0);
 
 	// Green material
 	GLfloat diffuse[] = { 0.0, 1.0, 0.0, 1.0 };
 	GLfloat ambient[] = { 0.0, 0.0, 0.0, 1.0 };
 	GLfloat specular[] = { 0.0, 0.0, 0.0, 1.0 };
-	GLfloat shininess = 100.0;
+	GLfloat shininess = 40.0;
 	shape3.SetupMaterial(ambient, diffuse, specular, shininess);
 
 	if (isFrame)
@@ -148,14 +211,15 @@ void drawShape4()
 {
 	glPushMatrix();
 
-	glTranslated(0, 10, 0);
-	//glRotatef(0, 0, 1, 0);
+	glTranslated(fSizeXBase - distanceRightXBase, 2 * fSizeYBase, fSizeYShape4);
+	glRotatef(-90, 0, 0, 1);
+	glRotatef(90, 1, 0, 0);
 
 	// Green material
 	GLfloat diffuse[] = { 0.0, 1.0, 0.0, 1.0 };
 	GLfloat ambient[] = { 0.0, 0.0, 0.0, 1.0 };
 	GLfloat specular[] = { 0.0, 0.0, 0.0, 1.0 };
-	GLfloat shininess = 100.0;
+	GLfloat shininess = 40.0;
 	shape3.SetupMaterial(ambient, diffuse, specular, shininess);
 
 	if (isFrame)
@@ -170,10 +234,15 @@ void drawShape5()
 {
 	glPushMatrix();
 
-	glTranslated(0, 10, 0);
-	//glRotatef(0, 0, 1, 0);
+	float halfDistXShape3 = (fSizeXShape3 - fSizeX2Shape3) / 2;
+	float halfXShape1 = (fSizeXShape1 * 2 + fRadiusShape1) / 2;
+	float Z = halfXShape1 - (halfDistXShape3 + distanceLeftXBase);
 
-	// Gold material
+	glTranslated(-fRadiusShape5 + Z, fSizeYBase * 2 + fRadiusShape5 + fSizeZShape3, fSizeYShape5);
+	glRotatef(-90, 0, 0, 1);
+	glRotatef(-90, 1, 0, 0);
+
+	// Pink material
 	GLfloat diffuse[] = { 1.0, 0.5, 0.5, 1.0 };
 	GLfloat ambient[] = { 0.0, 0.0, 0.0, 1.0 };
 	GLfloat specular[] = { 1.0, 1.0, 1.0, 1.0 };
@@ -188,6 +257,112 @@ void drawShape5()
 	glPopMatrix();
 }
 
+void drawChot1()
+{
+	glPushMatrix();
+
+	float halfDistXShape3 = (fSizeXShape3 - fSizeX2Shape3) / 2;
+	float distZ = 1.5 * fSizeZShape3;
+
+	glTranslated(-(halfDistXShape3 + distanceLeftXBase), 2 * fSizeYBase + distZ, 0);
+	glRotatef(-90, 1, 0, 0);
+
+	// Gold material
+	GLfloat diffuse[] = { 0.0, 0.0, 0.0, 1.0 };
+	GLfloat ambient[] = { 0.01, 0.01, 0.01, 1.0 };
+	GLfloat specular[] = { 0.5, 0.5, 0.5, 1.0 };
+	GLfloat shininess = 40.0;
+	chot1.SetupMaterial(ambient, diffuse, specular, shininess);
+
+	if (isFrame)
+		chot1.DrawWireframe();
+	else
+		chot1.Draw();
+
+	glPopMatrix();
+}
+
+void drawChot2()
+{
+	glPushMatrix();
+
+	float halfDistXShape3 = (fSizeXShape3 - fSizeX2Shape3) / 2;
+	float halfXShape1 = (fSizeXShape1 * 2 + fRadiusShape1) / 2;
+	float Z = halfXShape1 - (halfDistXShape3 + distanceLeftXBase);
+
+	glTranslated(Z - fRadiusShape5, 2 * fSizeYBase + fSizeZShape3 + fRadiusShape5, 0);
+	glRotatef(-90, 1, 0, 0);
+
+	// Gold material
+	GLfloat diffuse[] = { 0.0, 0.0, 0.0, 1.0 };
+	GLfloat ambient[] = { 0.01, 0.01, 0.01, 1.0 };
+	GLfloat specular[] = { 0.5, 0.5, 0.5, 1.0 };
+	GLfloat shininess = 40.0;
+	chot2.SetupMaterial(ambient, diffuse, specular, shininess);
+
+	if (isFrame)
+		chot2.DrawWireframe();
+	else
+		chot2.Draw();
+
+	glPopMatrix();
+}
+
+void drawChot3()
+{
+	glPushMatrix();
+
+	float halfDistXShape3 = (fSizeXShape3 - fSizeX2Shape3) / 2;
+	float halfXShape1 = (fSizeXShape1 * 2 + fRadiusShape1) / 2;
+	float Z = halfXShape1 - (halfDistXShape3 + distanceLeftXBase);
+
+	glTranslated(Z - fRadiusShape5, 2 * fSizeYBase + fSizeZShape3 + fRadiusShape5 + fSizeXShape5, 0);
+	glRotatef(-90, 1, 0, 0);
+
+	// Gold material
+	GLfloat diffuse[] = { 0.0, 0.0, 0.0, 1.0 };
+	GLfloat ambient[] = { 0.01, 0.01, 0.01, 1.0 };
+	GLfloat specular[] = { 0.5, 0.5, 0.5, 1.0 };
+	GLfloat shininess = 40.0;
+	chot3.SetupMaterial(ambient, diffuse, specular, shininess);
+
+	if (isFrame)
+		chot3.DrawWireframe();
+	else
+		chot3.Draw();
+
+	glPopMatrix();
+}
+
+void drawChot4()
+{
+	glPushMatrix();
+
+	float fSizeX2 = fSizeXShape4 / 1.5;
+	float fHeightX = fSizeX2 + fSizeX2 / 2;
+
+	float fSizeZ2 = fSizeZShape4 / 1.6;
+	float distZ = (fSizeZShape4 - fSizeZ2) / 7;
+	float fZ = fSizeZ2 + 6 * distZ;
+
+	glTranslated((fSizeXBase - distanceRightXBase) - fZ, 2 * fSizeYBase + fHeightX, 0);
+	glRotatef(-90, 1, 0, 0);
+
+	// Gold material
+	GLfloat diffuse[] = { 0.0, 0.0, 0.0, 1.0 };
+	GLfloat ambient[] = { 0.01, 0.01, 0.01, 1.0 };
+	GLfloat specular[] = { 0.5, 0.5, 0.5, 1.0 };
+	GLfloat shininess = 40.0;
+	chot4.SetupMaterial(ambient, diffuse, specular, shininess);
+
+	if (isFrame)
+		chot4.DrawWireframe();
+	else
+		chot4.Draw();
+
+	glPopMatrix();
+}
+
 void drawAllItems()
 {
 	drawAxis();
@@ -197,6 +372,10 @@ void drawAllItems()
 	drawShape3();
 	drawShape4();
 	drawShape5();
+	drawChot1();
+	drawChot2();
+	drawChot3();
+	drawChot4();
 }
 
 void myDisplay()
@@ -277,8 +456,8 @@ void myDisplay()
 void myInit()
 {
 	camera_angle = -30;  // Góc quay camera xung quanh trục Oy
-	camera_height = 5.5; // Chiều cao camera so với mặt phẳng xOz
-	camera_dis = 6.5;	// Khoảng cách đến trục Oy
+	camera_height = 5; // Chiều cao camera so với mặt phẳng xOz
+	camera_dis = 10;	// Khoảng cách đến trục Oy
 
 	lookAt_X = 0;
 	lookAt_Y = 1;
@@ -322,39 +501,55 @@ void myInit()
 
 void createItem()
 {
+	// Base
 	base.CreateCuboid(fSizeXBase, fSizeYBase, fSizeZBase);
 	base.SetColor(0);
 	base.CalculateFacesNorm();
 
-	float fSizeX = 3, fSizeY = 0.2, fSizeZ = 0.8, fRadius = 1;
-	int nSegment = 16;
-
 	// Shape 1
-	shape1.CreateShape1(fSizeX, fSizeY, fSizeZ, fRadius, nSegment);
+	shape1.CreateShape1(fSizeXShape1, fSizeYShape1, fSizeZShape1, fRadiusShape1, nSegment);
 	shape1.SetColor(0);
 	shape1.CalculateFacesNorm();
 
 	// Shape 2
-	shape2.CreateShape2(fSizeX, fSizeY, fSizeZ, nSegment);
+	shape2.CreateShape2(fSizeXShape2, fSizeYShape2, fSizeZShape2, nSegment);
 	shape2.SetColor(1);
 	shape2.CalculateFacesNorm();
 
 	// Shape 3
-	fSizeX = 5, fSizeZ = 1; fRadius = 0.4;
-	shape3.CreateShape3(fSizeX, fSizeY, fSizeZ, fRadius, nSegment);
+	shape3.CreateShape3(fSizeXShape3, fSizeYShape3, fSizeZShape3, fSizeX2Shape3, fRadiusShape3, nSegment);
 	shape3.SetColor(2);
 	shape3.CalculateFacesNorm();
 
 	// Shape 4
-	fSizeX = 4, fSizeZ = 2, fRadius = 0.4;
-	shape4.CreateShape4(fSizeX, fSizeY, fSizeZ, fRadius, nSegment);
+	shape4.CreateShape4(fSizeXShape4, fSizeYShape4, fSizeZShape4, fRadiusShape4, nSegment);
 	shape4.SetColor(3);
 	shape4.CalculateFacesNorm();
 
 	// Shape 5
-	shape5.CreateShape5(fSizeX, fSizeY, fSizeZ, nSegment);
+	shape5.CreateShape5(fSizeXShape5, fSizeYShape5, fSizeZShape5, fRadiusShape5, nSegment);
 	shape5.SetColor(4);
 	shape5.CalculateFacesNorm();
+
+	// Chot 1
+	chot1.CreateCylinder(nSegment, fHeightChot, fRadiusChot);
+	chot1.SetColor(5);
+	chot1.CalculateFacesNorm();
+
+	// Chot 2
+	chot2.CreateCylinder(nSegment, fHeightChot, fRadiusChot);
+	chot2.SetColor(5);
+	chot2.CalculateFacesNorm();
+
+	// Chot 3
+	chot3.CreateCylinder(nSegment, fHeightChot, fRadiusChot);
+	chot3.SetColor(5);
+	chot3.CalculateFacesNorm();
+
+	// Chot 4
+	chot4.CreateCylinder(nSegment, fHeightChot, fRadiusChot);
+	chot4.SetColor(5);
+	chot4.CalculateFacesNorm();
 }
 
 void printInstruction()
@@ -380,8 +575,8 @@ void mySpecialKeyboard(int key, int x, int y)
 		break;
 	case GLUT_KEY_DOWN:
 		camera_height -= 0.25;
-		/*if (camera_height < 0)
-			camera_height = 0;*/
+		if (camera_height < 0)
+			camera_height = 0;
 		break;
 	case GLUT_KEY_RIGHT:
 		camera_angle += 1;

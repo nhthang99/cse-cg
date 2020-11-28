@@ -91,9 +91,9 @@ public:
 	void CreateCuboid(float fSizeX, float fSizeY, float fSizeZ);
 	void CreateShape1(float fSizeX, float fSizeY, float fSizeZ, float fRadius, int nSegment);
 	void CreateShape2(float fSizeX, float fSizeY, float fSizeZ, int nSegment);
-	void CreateShape3(float fSizeX, float fSizeY, float fSizeZ, float fRadius, int nSegment);
+	void CreateShape3(float fSizeX, float fSizeY, float fSizeZ, float fSizeX2, float fRadius, int nSegment);
 	void CreateShape4(float fSizeX, float fSizeY, float fSizeZ, float fRadius, int nSegment);
-	void CreateShape5(float fSizeX, float fSizeY, float fSizeZ, int nSegment);
+	void CreateShape5(float fSizeX, float fSizeY, float fSizeZ, float fRadius, int nSegment);
 };
 
 #endif
