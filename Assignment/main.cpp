@@ -9,8 +9,8 @@
 
 using namespace std;
 
-int		screenWidth = 600;
-int		screenHeight = 300;
+int		screenWidth = 1200;
+int		screenHeight = 600;
 
 Mesh	tetrahedron;
 Mesh	cube;
@@ -127,19 +127,20 @@ int main(int argc, char* argv[])
 	glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB | GLUT_DEPTH);//set the display mode
 	glutInitWindowSize(screenWidth, screenHeight); //set window size
 	glutInitWindowPosition(100, 100); // set window position on screen
-	glutCreateWindow("Lab 2"); // open the screen window
+	glutCreateWindow("Nguyen Huu Thang 1713239"); // open the screen window
 
 	tetrahedron.CreateTetrahedron();
 	cube.CreateCube(1);
 	cuboid.CreateCuboid(3, 1, 1);
 	cylinder.CreateCylinder(20, 5, 1);
-	float fSizeX = 3, fSizeY = 0.3, fSizeZ = 0.8, fRadius = 1;
+	float fSizeX = 3, fSizeY = 0.2, fSizeZ = 0.8, fRadius = 1;
 	int nSegment = 16;
 	shape1.CreateShape1(fSizeX, fSizeY, fSizeZ, fRadius, nSegment);
 	shape2.CreateShape2(fSizeX, fSizeY, fSizeZ, nSegment);
-	fRadius = 0.4;
+	fSizeX = 5, fSizeZ = 1; fRadius = 0.4;
 	shape3.CreateShape3(fSizeX, fSizeY, fSizeZ, fRadius, nSegment);
-	//shape4.CreateShape4(-2, 1.2, 2.5, 0.2, 1, 0.7, 0.2, 0.5, 6);
+	fSizeX = 4, fSizeZ = 2, fRadius = 0.4;
+	shape4.CreateShape4(fSizeX, fSizeY, fSizeZ, fRadius, nSegment);
 	shape5.CreateShape5(fSizeX, fSizeY, fSizeZ, nSegment);
 
 	myInit();

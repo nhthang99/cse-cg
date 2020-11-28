@@ -72,7 +72,7 @@ public:
 	void CreateShape1(float fSizeX, float fSizeY, float fSizeZ, float fRadius, int nSegment);
 	void CreateShape2(float fSizeX, float fSizeY, float fSizeZ, int nSegment);
 	void CreateShape3(float fSizeX, float fSizeY, float fSizeZ, float fRadius, int nSegment);
-	//void CreateShape4(float fSizeX1, float fSizeX2, float fSizeX3, float fSizeY, float fSizeZ1, float fSizeZ2, float fSizeZ3, float fRadius, int nSegment);
+	void CreateShape4(float fSizeX, float fSizeY, float fSizeZ, float fRadius, int nSegment);
 	void CreateShape5(float fSizeX, float fSizeY, float fSizeZ, int nSegment);
 };
 
