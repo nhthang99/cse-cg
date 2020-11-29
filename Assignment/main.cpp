@@ -147,6 +147,33 @@ void drawNen(float alpha)
 	glEnable(GL_LIGHTING);
 }
 
+void drawBackground(float fSizeX, float fSizeY, float fAngle=PI/3)
+{
+	float fWidth = fSizeX / 6;
+	float fHeight = fSizeX / 3;
+
+	glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+	glColor3f(0.5, 0.5, 0.5);
+	glBegin(GL_POLYGON);
+
+	glVertex3f(0, fSizeY, 0);
+	glVertex3f(0, fSizeY, fHeight);
+	glVertex3f(-fWidth, fSizeY, fHeight);
+	glVertex3f(-fWidth, fSizeY, 0);
+
+	glEnd();
+
+	glColor3f(0.5, 0.5, 0.5);
+	glBegin(GL_POLYGON);
+
+	glVertex3f(-fWidth, fSizeY, fHeight);
+	glVertex3f(-(fWidth + fWidth * cos(fAngle)), fSizeY, fHeight + fWidth * sin(fAngle));
+	glVertex3f(-fSizeX / 2, fSizeY, fWidth + fWidth * cos(fAngle));
+	glVertex3f(-(fSizeX / 2 - fWidth * cos(fAngle)), fSizeY, fWidth + fWidth * cos(fAngle) - fWidth * sin(fAngle));
+
+	glEnd();
+}
+
 void drawBase()
 {
 	glPushMatrix();
@@ -431,10 +458,12 @@ void drawAllItems()
 
 void myDisplay()
 {
+	// Clear parameter
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
 	GLfloat light_position0[] = { 10.0, 10.0, 10.0, 0.0 };
 	glLightfv(GL_LIGHT0, GL_POSITION, light_position0);
 
+	// Turn on/off light mode
 	if (isLight)
 	{
 		glEnable(GL_LIGHT1);
@@ -454,10 +483,11 @@ void myDisplay()
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
 
-	float camera_X = camera_dis * sinf(camera_angle * PI / 180);
-	float camera_Y = camera_height;
-	float camera_Z = camera_dis * cosf(camera_angle * PI / 180);
+	float camera_X = camera_dis * sinf(camera_angle * PI / 180); // camera respect to X-dimentional
+	float camera_Y = camera_height; // camera respect to Y-dimentional
+	float camera_Z = camera_dis * cosf(camera_angle * PI / 180); // // camera respect to Z-dimentional
 
+	// Change view mode
 	if (isView)
 		gluLookAt(0, 10, 0, 0, 0, 0, 0, 0, -1);
 	else if (camera_dis == 0)
@@ -465,43 +495,50 @@ void myDisplay()
 	else
 		gluLookAt(camera_X, camera_Y, camera_Z, lookAt_X, lookAt_Y, lookAt_Z, 0, 1, 0);
 
+	// Setup view port
 	glViewport(0, 0, screenWidth, screenHeight);
 
 	// Clear the stencil buffers
 	glClearStencil(0);
 	// Clear depth
 	glClearDepth(1.0f);
-	// Draw
+
+	// Draw all items
 	drawAllItems();
 
-	/* Don't update color or depth. */
+	// No update color and depth
 	glDisable(GL_DEPTH_TEST);
 	glColorMask(GL_FALSE, GL_FALSE, GL_FALSE, GL_FALSE);
 	/* Draw 1 into the stencil buffer. */
 	glEnable(GL_STENCIL_TEST);
 	glStencilFunc(GL_ALWAYS, 1, 1);
 	glStencilOp(GL_KEEP, GL_KEEP, GL_REPLACE);
-	drawNen(1.0f);
 
-	/* Re-enable update of color and depth. */
+	// Draw background
+	drawNen(1.0f);
+	//drawBackground(6, 0);
+
+	// Update of color and depth
 	glColorMask(GL_TRUE, GL_TRUE, GL_TRUE, GL_TRUE);
 	glEnable(GL_DEPTH_TEST);
-	/* Now, only render where stencil is set to 1. */
+	
+	// Only render where stencil is set to 1
 	glStencilFunc(GL_EQUAL, 1, 1);
 	glStencilOp(GL_KEEP, GL_KEEP, GL_KEEP);
 
-	//Draw the cube, reflected vertically, at all PIxels where the stencil
-	//buffer is 1
+	// Draw the cube, reflected vertically, at all pixels where the stencil
 	glPushMatrix();
 	glScalef(1, -1, 1);
 	drawAllItems();
 	glPopMatrix();
 	glDisable(GL_STENCIL_TEST);
-	// // Blend the floor onto the screen
+	// Blend the floor onto the screen
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
+	// Draw reflected background
 	drawNen(0.7f);
+	//drawBackground(6, 0);
 	glDisable(GL_BLEND);
 
 	glFlush();
@@ -514,16 +551,16 @@ void myInit()
 	camera_height = 6.0; // Chiều cao camera so với mặt phẳng xOz
 	camera_dis = 15.0;	// Khoảng cách đến trục Oy
 
+	// Look parameter
 	lookAt_X = 0;
 	lookAt_Y = 1;
 	lookAt_Z = 0;
 
+	// Clear color
 	glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
 
 	glFrontFace(GL_CCW);
 	glEnable(GL_DEPTH_TEST);
-
-	//glutTimerFunc(25, processTimer, 0);
 
 	const float ar = (float)screenWidth / (float)screenHeight;
 	glMatrixMode(GL_PROJECTION);
@@ -535,17 +572,20 @@ void myInit()
 	glEnable(GL_NORMALIZE);
 	glShadeModel(GL_SMOOTH);
 	glDepthFunc(GL_LEQUAL);
-	//glEnable(GL_COLOR_MATERIAL);
+
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+
 	// Lighting
 	glEnable(GL_LIGHTING);
 	glEnable(GL_LIGHT0);
 
+	// Light model
 	GLfloat lmodel_ambient[] = { 0.0, 0.0, 0.0, 1.0 };
 	glLightModelfv(GL_LIGHT_MODEL_AMBIENT, lmodel_ambient);
 	glLightModeli(GL_LIGHT_MODEL_TWO_SIDE, GL_TRUE);
 	glLightModeli(GL_LIGHT_MODEL_LOCAL_VIEWER, GL_TRUE);
 
+	// Light parameter
 	GLfloat light_ambient0[] = { 0.0, 0.0, 0.0, 1.0 };
 	GLfloat light_diffuse0[] = { 1.0, 1.0, 1.0, 1.0 };
 	GLfloat light_specular0[] = { 1.0, 1.0, 1.0, 1.0 };
@@ -634,10 +674,10 @@ void mySpecialKeyboard(int key, int x, int y)
 			camera_height = 0;
 		break;
 	case GLUT_KEY_RIGHT:
-		camera_angle += 1;
+		camera_angle += 2;
 		break;
 	case GLUT_KEY_LEFT:
-		camera_angle -= 1;
+		camera_angle -= 2;
 		break;
 	}
 	glutPostRedisplay();
@@ -645,19 +685,14 @@ void mySpecialKeyboard(int key, int x, int y)
 
 void myKeyboard(unsigned char key, int x, int y)
 {
-
 	switch (key)
 	{
-	/*case '1':
-		base.rotateY += baseRotateStep;
-		if (base.rotateY > 360)
-			base.rotateY -= 360;
+	case '1':
+		chot2.rotateX += 10;
 		break;
 	case '2':
-		base.rotateY -= baseRotateStep;
-		if (base.rotateY < 0)
-			base.rotateY += 360;
-		break;*/
+		chot2.rotateX -= 10;
+		break;
 	case 'w':
 	case 'W':
 		isFrame = !isFrame;
