@@ -14,7 +14,7 @@ float ColorArr[COLORNUM][3] = {{1.0, 0.0, 0.0},
 								{1.0, 0.0, 1.0},
 								{0.0, 1.0, 1.0},  // yello(5)
 								{0.3, 0.3, 0.3},
-								{0.5, 0.5, 0.5},
+								{0.5, 0.5, 0.5}, // gray(7)
 								{0.9, 0.9, 0.9},
 								{1.0, 0.5, 0.5},
 								{0.5, 1.0, 0.5},
@@ -263,10 +263,10 @@ void Mesh::CreateCuboid(float fSizeX, float fSizeY, float fSizeZ)
 
 	face[3].nVerts = 4;
 	face[3].vert = new VertexID[face[3].nVerts];
-	face[3].vert[0].vertIndex = 3;
-	face[3].vert[1].vertIndex = 2;
-	face[3].vert[2].vertIndex = 6;
-	face[3].vert[3].vertIndex = 7;
+	face[3].vert[0].vertIndex = 2;
+	face[3].vert[1].vertIndex = 3;
+	face[3].vert[2].vertIndex = 7;
+	face[3].vert[3].vertIndex = 6;
 	for (int i = 0; i < face[3].nVerts; i++)
 		face[3].vert[i].colorIndex = 3;
 
@@ -291,7 +291,6 @@ void Mesh::CreateCuboid(float fSizeX, float fSizeY, float fSizeZ)
 
 void Mesh::CreateShape1(float fSizeX, float fSizeY, float fSizeZ, float fRadius, int nSegment)
 {	
-	// TODO Ve tiep tuyen
 	int numCyVerts = nSegment * 3 + 2;
 	int numCubeVerts = 8;
 	numVerts = numCyVerts + numCubeVerts;
@@ -359,8 +358,8 @@ void Mesh::CreateShape1(float fSizeX, float fSizeY, float fSizeZ, float fRadius,
 	pt[point_idx + 3].set(fSizeX, -fSizeY, -fSizeZ);
 	pt[point_idx + 4].set(-fSizeX, -fSizeY, fSizeZ);
 	pt[point_idx + 5].set(-fSizeX, fSizeY, fSizeZ);
-	pt[point_idx + 6].set(-fSizeX, fSizeY, fSizeZ - fRadius);
-	pt[point_idx + 7].set(-fSizeX, -fSizeY, fSizeZ - fRadius);
+	pt[point_idx + 6].set(fRadius * cos(PI + fAngle * nSegment) - fSizeX, fSizeY, fRadius * sin(PI + fAngle * nSegment) + fSizeZ);
+	pt[point_idx + 7].set(fRadius * cos(PI + fAngle * nSegment) - fSizeX, -fSizeY, fRadius * sin(PI + fAngle * nSegment) + fSizeZ);
 
 	// Frontal face of cuboid
 	face[++face_idx].nVerts = 4;
