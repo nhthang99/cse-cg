@@ -60,7 +60,7 @@ float fSizeXShape3 = fSizeXBase - distanceLeftXBase * 2;
 float fSizeYShape3 = fSizeYBase * 1.5;
 float fSizeZShape3 = 1.0;
 float fSizeX2Shape3 = fSizeXShape3 / 1.5;
-float fRadiusShape3 = 0.4;
+float fRadiusShape3 = 0.45;
 
 // Shape 4 size
 float fSizeXShape4 = 4.0;
@@ -77,6 +77,15 @@ float fRadiusShape5 = fSizeXShape5 / 3.2;
 // Chot size
 float fHeightChot = fSizeYBase * 6 + 0.2;
 float fRadiusChot = 0.2;
+
+// Chot 2 translation
+float fSizeX2 = fSizeXShape4 / 1.5;
+float fHeightX = fSizeX2 + fSizeX2 / 2;
+
+float fSizeZ2 = fSizeZShape4 / 1.6;
+float distZ = (fSizeZShape4 - fSizeZ2) / 7;
+float fZ = fSizeZ2 + 6 * distZ;
+float fXTranslateChot2 = (fSizeXBase - distanceRightXBase) - fZ;
 
 void drawAxis()
 {
@@ -99,79 +108,126 @@ void drawAxis()
 	glEnd();
 }
 
-void drawLucGiac(float x, float y, float z, float R, float alpha)
-{
+void makeBackground(float fSizeX, float fSizeZ, float fRadius, float fSizeY=0, float alpha=0.7) {
+	int mode = GL_QUADS;
+	if (isFrame) {
+		mode = GL_LINE_LOOP;
+	}
 	glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
-	glBegin(GL_QUADS);
-	glColor4f(0.3, 1.0, 1.0, alpha);
-	glNormal3f(0.0f, 1.0f, 0.0f);
-	glVertex3f(x + R * cos(-60 * PI / 180), y, z + R * sin(-60 * PI / 180));
-	glVertex3f(x + R * cos(0), y, z + R * sin(0));
-	glVertex3f(x + R * cos(60 * PI / 180), y, z + R * sin(60 * PI / 180));
-	glVertex3f(x, y, z);
+
+	glBegin(mode);
+		glColor4f(0.6f, 0.6f, 0.6f, alpha);
+		glNormal3f(0.0f, 1.0f, 0.0f);
+
+		glVertex3f(fSizeX + fRadius, fSizeY, fSizeZ + 2 * fRadius / 3);
+		glVertex3f(fSizeX + fRadius, fSizeY, fSizeZ + fRadius / 3);
+		glVertex3f(fSizeX + fRadius / 2, fSizeY, fSizeZ + fRadius / 2);
+		glVertex3f(fSizeX + 1.8 * fRadius / 3, fSizeY, fSizeZ + 2.4 * fRadius / 3);
 	glEnd();
 
-	glBegin(GL_QUADS);
-	glColor4f(77.0 / 255.0, 166.0 / 255.0, 210.0 / 255.0, alpha);
-	glNormal3f(0.0f, 1.0f, 0.0f);
-	glVertex3f(x + R * cos(60 * PI / 180), y, z + R * sin(60 * PI / 180));
-	glVertex3f(x + R * cos(120 * PI / 180), y, z + R * sin(120 * PI / 180));
-	glVertex3f(x + R * cos(180 * PI / 180), y, z + R * sin(180 * PI / 180));
-	glVertex3f(x, y, z);
+	glBegin(mode);
+		glColor4f(0.6f, 0.6f, 0.6f, alpha);
+		glNormal3f(0.0f, 1.0f, 0.0f);
+
+		glVertex3f(fSizeX + fRadius, fSizeY, fSizeZ + 2 * fRadius / 3);
+		glVertex3f(fSizeX + fRadius, fSizeY, fSizeZ + fRadius / 3);
+		glVertex3f(fSizeX + fRadius / 2, fSizeY, fSizeZ + fRadius / 2);
+		glVertex3f(fSizeX + 1.8 * fRadius / 3, fSizeY, fSizeZ + 2.4 * fRadius / 3);
 	glEnd();
+
+	glBegin(mode);
+		glColor4f(0.6f, 0.6f, 0.6f, alpha);
+		glNormal3f(0.0f, 1.0f, 0.0f);
+
+		glVertex3f(fSizeX + fRadius / 2, fSizeY, fSizeZ + fRadius / 2);
+		glVertex3f(fSizeX + 2 * fRadius / 3, fSizeY, fSizeZ);
+		glVertex3f(fSizeX + fRadius / 3, fSizeY, fSizeZ);
+		glVertex3f(fSizeX + 0.6 * fRadius / 3, fSizeY, fSizeZ + 1.2 * fRadius / 3);
+	glEnd();
+
+	glBegin(mode);
+		glColor4f(0.6f, 0.6f, 0.6f, alpha);
+		glNormal3f(0.0f, 1.0f, 0.0f);
+
+		glVertex3f(fSizeX, fSizeY, fSizeZ + fRadius / 3);
+		glVertex3f(fSizeX + 0.6 * fRadius / 3, fSizeY, fSizeZ + 1.2 * fRadius / 3);
+		glVertex3f(fSizeX + 0.3 * fRadius / 3, fSizeY, fSizeZ + 2.1 * fRadius / 3);
+		glVertex3f(fSizeX, fSizeY, fSizeZ + 2 * fRadius / 3);
+	glEnd();
+
+	glBegin(mode);
+		glColor4f(0.6f, 0.6f, 0.6f, alpha);
+		glNormal3f(0.0f, 1.0f, 0.0f);
+
+		glVertex3f(fSizeX + 0.3 * fRadius / 3, fSizeY, fSizeZ + 2.1 * fRadius / 3);
+		glVertex3f(fSizeX + 0.6 * fRadius / 3, fSizeY, fSizeZ + 1.2 * fRadius / 3);
+		glVertex3f(fSizeX, fSizeY, fSizeZ + fRadius / 3);
+		glVertex3f(fSizeX, fSizeY, fSizeZ + 2 * fRadius / 3);
+	glEnd();
+
+	glBegin(mode);
+		glColor4f(0.6f, 0.6f, 0.6f, alpha);
+		glNormal3f(0.0f, 1.0f, 0.0f);
+
+		glVertex3f(fSizeX + 2 * fRadius / 3, fSizeY, fSizeZ + fRadius);
+		glVertex3f(fSizeX + 1.8 * fRadius / 3, fSizeY, fSizeZ + 2.4 * fRadius / 3);
+		glVertex3f(fSizeX + 0.9 * fRadius / 3, fSizeY, fSizeZ + 2.7 * fRadius / 3);
+		glVertex3f(fSizeX + fRadius / 3, fSizeY, fSizeZ + fRadius);
+	glEnd();
+
+	glBegin(mode);
+		glColor4f(0.6f, 0.6f, 0.6f, alpha);
+		glNormal3f(0.0f, 1.0f, 0.0f);
+
+		glVertex3f(fSizeX + 0.9 * fRadius / 3, fSizeY, fSizeZ + 2.7 * fRadius / 3);
+		glVertex3f(fSizeX + 0.75 * fRadius / 3, fSizeY, fSizeZ + 2.25 * fRadius / 3);
+		glVertex3f(fSizeX + 0.3 * fRadius / 3, fSizeY, fSizeZ + 2.1 * fRadius / 3);
+		glVertex3f(fSizeX, fSizeY, fSizeZ + fRadius);
+	glEnd();
+
+}
+
+void drawSmallPart(int fRadius)
+{
+	for (int fX = 0; fX < 2; fX += fRadius) {
+		for (int fZ = 0; fZ < 2; fZ += fRadius) {
+			glTranslatef(-fRadius / 2, 0, -fRadius / 2);
+			glRotatef((fX % 2) * 180 + (fZ % 2) * 90, 0, 1, 0);
+			glTranslatef(fRadius / 2, 0, fRadius / 2);
+			makeBackground(fZ / 2, fX / 2, fRadius, 0);
+			//makeBackground(fZ / 2, fX / 2, fRadius, -0.01);
+		}
+	}
+}
+
+void drawBackground(float alpha, float fSizeY=-0.005, int fRadius=1) {
+	glDisable(GL_LIGHTING);
+	glColor3f(1.0f, 1.0f, 1.0f);
+
+	/*glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 
 	glBegin(GL_QUADS);
 	glColor4f(1.0, 1.0, 1.0, alpha);
 	glNormal3f(0.0f, 1.0f, 0.0f);
-	glVertex3f(x + R * cos(180 * PI / 180), y, z + R * sin(180 * PI / 180));
-	glVertex3f(x + R * cos(240 * PI / 180), y, z + R * sin(240 * PI / 180));
-	glVertex3f(x + R * cos(300 * PI / 180), y, z + R * sin(300 * PI / 180));
-	glVertex3f(x, y, z);
-	glEnd();
-}
 
-void drawNen(float alpha)
-{
-	float y = 0;
-	glDisable(GL_LIGHTING);
-	glColor3f(1.0f, 1.0f, 1.0f);
-	float d = 0.7, R = d / cos(PI / 6);
-	int i = 0;
-	for (float x = -30; x < 30; x += R + R * cos(PI / 3))
-	{
-		float z = (i % 2 == 0) ? -20 : (-20 - d);
-		for (; z < 20; z += 2 * d)
-			drawLucGiac(x, y, z, R, alpha);
-		i++;
+	glVertex3f(-200, fSizeY, -200);
+	glVertex3f(-200, fSizeY, 200);
+	glVertex3f(200, fSizeY, 200);
+	glVertex3f(200, fSizeY, -200);
+
+	glEnd();*/
+
+	for (int idx_i = 0; idx_i < 3; idx_i++) {
+		glTranslatef(0, 0, 20 * idx_i);
+		for (int idx_k = -10; idx_k < 10; idx_k++) {
+			glTranslatef(0, 0, 2 * idx_k);
+			for (int idx_j = -5; idx_j < 12; idx_j++) {
+				glTranslatef(2 * idx_j, 0, 0);
+				drawSmallPart(fRadius);
+			}
+		}
 	}
 	glEnable(GL_LIGHTING);
-}
-
-void drawBackground(float fSizeX, float fSizeY, float fAngle=PI/3)
-{
-	float fWidth = fSizeX / 6;
-	float fHeight = fSizeX / 3;
-
-	glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
-	glColor3f(0.5, 0.5, 0.5);
-	glBegin(GL_POLYGON);
-
-	glVertex3f(0, fSizeY, 0);
-	glVertex3f(0, fSizeY, fHeight);
-	glVertex3f(-fWidth, fSizeY, fHeight);
-	glVertex3f(-fWidth, fSizeY, 0);
-
-	glEnd();
-
-	glColor3f(0.5, 0.5, 0.5);
-	glBegin(GL_POLYGON);
-
-	glVertex3f(-fWidth, fSizeY, fHeight);
-	glVertex3f(-(fWidth + fWidth * cos(fAngle)), fSizeY, fHeight + fWidth * sin(fAngle));
-	glVertex3f(-fSizeX / 2, fSizeY, fWidth + fWidth * cos(fAngle));
-	glVertex3f(-(fSizeX / 2 - fWidth * cos(fAngle)), fSizeY, fWidth + fWidth * cos(fAngle) - fWidth * sin(fAngle));
-
-	glEnd();
 }
 
 void drawBase()
@@ -228,7 +284,7 @@ void drawShape2()
 	glPushMatrix();
 
 	float distBaseY = 2 * fSizeYBase + fSizeZShape2;
-	float fRadiusShape2 = 4 * fSizeZShape2 / 5;
+	float fRadiusShape2 = 7 * fSizeZShape2 / 8;
 	float fSizeX2Shape2 = 3 * fSizeXShape2 / 2;
 	float fSizeZ3Shape2 = fSizeZShape2 / 2;
 
@@ -237,7 +293,7 @@ void drawShape2()
 
 	float distX = halfXShape1 - (halfDistXShape3 + distanceLeftXBase) - fRadiusShape5 * 2;
 
-	float lengthX = fRadiusShape2 + fSizeXShape2 + fSizeX2Shape2 + fSizeZ3Shape2;
+	float lengthX = fRadiusShape2 + fSizeXShape2 + fSizeX2Shape2 + fSizeZ3Shape2 * 2;
 	float centerX = lengthX / 2;
 
 	float fRotateAngle = -15;
@@ -246,6 +302,10 @@ void drawShape2()
 	glTranslated(fSizeXShape2 + fRadiusShape2 + distX, distBaseY + fSizeZShape3 + fSizeXShape5 + fTranslateAfterRotate, -fSizeYShape2);
 	glRotatef(-90, 1, 0, 0);
 	glRotatef(fRotateAngle, 0, 1, 0);
+
+	//glTranslatef(-distX - centerX + fXTranslateChot2, 0, 0);
+	glRotatef(chot2.rotateY, 0, 1, 0);
+	//glTranslatef(-(-distX - centerX + fXTranslateChot2), 0, 0);
 
 	// Pink material
 	GLfloat diffuse[] = { 1.0, 0.5, 0.5, 1.0 };
@@ -345,7 +405,7 @@ void drawChot1()
 	glTranslated(-(halfDistXShape3 + distanceLeftXBase), 2 * fSizeYBase + distZ, 0);
 	glRotatef(-90, 1, 0, 0);
 
-	// Gold material
+	// Black material
 	GLfloat diffuse[] = { 0.0, 0.0, 0.0, 1.0 };
 	GLfloat ambient[] = { 0.0, 0.0, 0.0, 1.0 };
 	GLfloat specular[] = { 1.0, 1.0, 1.0, 1.0 };
@@ -364,14 +424,11 @@ void drawChot2()
 {
 	glPushMatrix();
 
-	float halfDistXShape3 = (fSizeXShape3 - fSizeX2Shape3) / 2;
-	float halfXShape1 = (fSizeXShape1 * 2 + fRadiusShape1) / 2;
-	float Z = halfXShape1 - (halfDistXShape3 + distanceLeftXBase);
-
-	glTranslated(Z - fRadiusShape5, 2 * fSizeYBase + fSizeZShape3 + fRadiusShape5, 0);
+	glTranslated(fXTranslateChot2, 2 * fSizeYBase + fHeightX, 0);
 	glRotatef(-90, 1, 0, 0);
+	glRotatef(chot2.rotateY, 0, 1, 0);
 
-	// Gold material
+	// Black material
 	GLfloat diffuse[] = { 0.0, 0.0, 0.0, 1.0 };
 	GLfloat ambient[] = { 0.0, 0.0, 0.0, 1.0 };
 	GLfloat specular[] = { 1.0, 1.0, 1.0, 1.0 };
@@ -397,7 +454,7 @@ void drawChot3()
 	glTranslated(Z - fRadiusShape5, 2 * fSizeYBase + fSizeZShape3 + fRadiusShape5 + fSizeXShape5, 0);
 	glRotatef(-90, 1, 0, 0);
 
-	// Gold material
+	// Black material
 	GLfloat diffuse[] = { 0.0, 0.0, 0.0, 1.0 };
 	GLfloat ambient[] = { 0.0, 0.0, 0.0, 1.0 };
 	GLfloat specular[] = { 1.0, 1.0, 1.0, 1.0 };
@@ -416,17 +473,14 @@ void drawChot4()
 {
 	glPushMatrix();
 
-	float fSizeX2 = fSizeXShape4 / 1.5;
-	float fHeightX = fSizeX2 + fSizeX2 / 2;
+	float halfDistXShape3 = (fSizeXShape3 - fSizeX2Shape3) / 2;
+	float halfXShape1 = (fSizeXShape1 * 2 + fRadiusShape1) / 2;
+	float Z = halfXShape1 - (halfDistXShape3 + distanceLeftXBase);
 
-	float fSizeZ2 = fSizeZShape4 / 1.6;
-	float distZ = (fSizeZShape4 - fSizeZ2) / 7;
-	float fZ = fSizeZ2 + 6 * distZ;
-
-	glTranslated((fSizeXBase - distanceRightXBase) - fZ, 2 * fSizeYBase + fHeightX, 0);
+	glTranslated(Z - fRadiusShape5, 2 * fSizeYBase + fSizeZShape3 + fRadiusShape5, 0);
 	glRotatef(-90, 1, 0, 0);
 
-	// Gold material
+	// Black material
 	GLfloat diffuse[] = { 0.0, 0.0, 0.0, 1.0 };
 	GLfloat ambient[] = { 0.0, 0.0, 0.0, 1.0 };
 	GLfloat specular[] = { 1.0, 1.0, 1.0, 1.0 };
@@ -443,7 +497,7 @@ void drawChot4()
 
 void drawAllItems()
 {
-	drawAxis();
+	//drawAxis();
 	drawBase();
 	drawShape1();
 	drawShape2();
@@ -488,10 +542,11 @@ void myDisplay()
 	float camera_Z = camera_dis * cosf(camera_angle * PI / 180); // // camera respect to Z-dimentional
 
 	// Change view mode
-	if (isView)
-		gluLookAt(0, 10, 0, 0, 0, 0, 0, 0, -1);
+	if (isView) {
+		gluLookAt(0, 1, 15, lookAt_X, lookAt_Y, lookAt_Z, 0, 1, 1);
+	}
 	else if (camera_dis == 0)
-		gluLookAt(camera_X, camera_Y, camera_Z, lookAt_X, lookAt_Y, lookAt_Z, sinf(camera_angle * PI / 180), 0, cosf(camera_angle * PI / 180));
+		gluLookAt(camera_X, camera_Y, camera_Z, lookAt_X, lookAt_Y, lookAt_Z, sin(camera_angle * PI / 180), 0, cos(camera_angle * PI / 180));
 	else
 		gluLookAt(camera_X, camera_Y, camera_Z, lookAt_X, lookAt_Y, lookAt_Z, 0, 1, 0);
 
@@ -515,15 +570,14 @@ void myDisplay()
 	glStencilOp(GL_KEEP, GL_KEEP, GL_REPLACE);
 
 	// Draw background
-	drawNen(1.0f);
-	//drawBackground(6, 0);
+	drawBackground(1.0f);
 
 	// Update of color and depth
 	glColorMask(GL_TRUE, GL_TRUE, GL_TRUE, GL_TRUE);
 	glEnable(GL_DEPTH_TEST);
 	
 	// Only render where stencil is set to 1
-	glStencilFunc(GL_EQUAL, 1, 1);
+	glStencilFunc(GL_EQUAL, 1, 2);
 	glStencilOp(GL_KEEP, GL_KEEP, GL_KEEP);
 
 	// Draw the cube, reflected vertically, at all pixels where the stencil
@@ -537,8 +591,8 @@ void myDisplay()
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
 	// Draw reflected background
-	drawNen(0.7f);
-	//drawBackground(6, 0);
+	drawBackground(0.7f);
+
 	glDisable(GL_BLEND);
 
 	glFlush();
@@ -547,6 +601,8 @@ void myDisplay()
 
 void myInit()
 {
+	isLight = true;
+
 	camera_angle = -10.0;  // Góc quay camera xung quanh trục Oy
 	camera_height = 6.0; // Chiều cao camera so với mặt phẳng xOz
 	camera_dis = 15.0;	// Khoảng cách đến trục Oy
@@ -670,13 +726,11 @@ void mySpecialKeyboard(int key, int x, int y)
 		break;
 	case GLUT_KEY_DOWN:
 		camera_height -= 0.25;
-		if (camera_height < 0)
-			camera_height = 0;
-		break;
-	case GLUT_KEY_RIGHT:
-		camera_angle += 2;
 		break;
 	case GLUT_KEY_LEFT:
+		camera_angle += 2;
+		break;
+	case GLUT_KEY_RIGHT:
 		camera_angle -= 2;
 		break;
 	}
@@ -688,10 +742,10 @@ void myKeyboard(unsigned char key, int x, int y)
 	switch (key)
 	{
 	case '1':
-		chot2.rotateX += 10;
+		chot2.rotateY -= 1;
 		break;
 	case '2':
-		chot2.rotateX -= 10;
+		chot2.rotateY += 1;
 		break;
 	case 'w':
 	case 'W':
@@ -700,6 +754,18 @@ void myKeyboard(unsigned char key, int x, int y)
 	case 'v':
 	case 'V':
 		isView = !isView;
+		if (isView)
+		{
+			glMatrixMode(GL_PROJECTION);
+			glLoadIdentity();
+			glOrtho(-16, 16, -8, 8, -1000, 1000);
+			break;
+		}
+		else
+		{
+			myInit();
+			break;
+		}
 	case 'd':
 	case 'D':
 		isLight = !isLight;
